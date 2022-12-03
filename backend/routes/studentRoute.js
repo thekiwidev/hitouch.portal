@@ -8,7 +8,7 @@ const {
   registerStudent,
   loginStudent,
   getStudent,
-} = require("../controllers/userController");
+} = require("../controllers/studentController");
 
 router.post("/", registerStudent);
 router.post("/login", loginStudent);

@@ -4,60 +4,6 @@ const PersonalInfo = require("../models/personalInfoModel");
 const Student = require("../models/studentModels");
 
 // ==================================
-// CREATE A STUDENT Basic Information
-// @route       POST api/users
-// @desc        creata a new user
-// @access      Private
-
-const addInfo = asyncHandler(async (req, res) => {
-  // get the params from the body
-  const {
-    firstName,
-    lastName,
-    otherNames,
-    phoneNumber,
-    dob,
-    firstLang,
-    citizenship,
-    passportNum,
-    passportExpDate,
-    gender,
-    maritalStatus,
-  } = req.body;
-  // const student = await Student.findById(req.student.id);
-
-  const infoExist = await PersonalInfo.findOne({ email: student.email });
-
-  if (infoExist) {
-    res.status(400);
-    throw new Error("Please Update your info.");
-  }
-
-  const info = await PersonalInfo.create({
-    // user: req.student.id,
-    email: student.email,
-    firstName,
-    lastName,
-    otherNames,
-    phoneNumber,
-    dob,
-    firstLang,
-    citizenship,
-    passportNum,
-    passportExpDate,
-    gender,
-    maritalStatus,
-  });
-
-  if (info) {
-    res.status(201).json(info);
-  } else {
-    res.status(400);
-    throw new Errow("Invalid Info");
-  }
-});
-
-// ==================================
 // GET A STUDENT INFO
 // @route       POST api/users
 // @desc        creata a new user
@@ -107,7 +53,6 @@ const updateInfo = asyncHandler(async (req, res) => {
 });
 
 module.exports = {
-  addInfo,
   getInfo,
   updateInfo,
 };

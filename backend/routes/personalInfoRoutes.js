@@ -5,7 +5,6 @@ const router = express.Router();
 const { protect } = require("../middleware/authMidleware");
 
 const {
-  addInfo,
   updateInfo,
   getInfo,
 } = require("../controllers/personalInfoControllers");
