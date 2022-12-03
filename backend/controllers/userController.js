@@ -3,6 +3,7 @@ const bcrypt = require("bcryptjs");
 const asyncHandler = require("express-async-handler");
 
 const Student = require("../models/studentModels");
+const PersonalInfo = require("../models/personalInfoModel");
 
 // ==================================
 // CREATE A STUDENT
@@ -10,9 +11,9 @@ const Student = require("../models/studentModels");
 // @desc        creata a new user
 // @access      Public
 const registerStudent = asyncHandler(async (req, res) => {
-  const { email, password } = req.body;
+  const { firstName, lastName, email, password } = req.body;
 
-  if (!email || !password) {
+  if (!firstName || !lastName || !email || !password) {
     res.status(400);
     throw new Error("Please add all fields");
   }
@@ -31,15 +32,29 @@ const registerStudent = asyncHandler(async (req, res) => {
 
   // CREATE THE STUDENT
   const student = await Student.create({
+    name: `${lastName ? firstName + " " + lastName : firstName}`,
     email,
     password: hashedPassword,
   });
 
   if (student) {
+    const userInfo = await PersonalInfo.create({
+      user: student.id,
+      firstName,
+      lastName,
+      email: student.email,
+    });
     res.status(201).json({
       _id: student.id,
       email: student.email,
+      name: student.name,
       token: generateToken(student._id),
+      info: {
+        firstName: userInfo.firstName,
+        lastName: userInfo.lastName,
+        user: userInfo.user,
+        email: userInfo.email,
+      },
     });
   } else {
     res.status(400);

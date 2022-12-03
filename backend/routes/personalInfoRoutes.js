@@ -10,7 +10,7 @@ const {
   getInfo,
 } = require("../controllers/personalInfoControllers");
 
-router.route("/").get(protect, getInfo).post(protect, addInfo);
+router.route("/").get(protect, getInfo);
 router.route("/:id").put(protect, updateInfo);
 
 module.exports = router;

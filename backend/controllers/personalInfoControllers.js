@@ -24,7 +24,7 @@ const addInfo = asyncHandler(async (req, res) => {
     gender,
     maritalStatus,
   } = req.body;
-  const student = await Student.findById(req.student.id);
+  // const student = await Student.findById(req.student.id);
 
   const infoExist = await PersonalInfo.findOne({ email: student.email });
 
@@ -34,7 +34,7 @@ const addInfo = asyncHandler(async (req, res) => {
   }
 
   const info = await PersonalInfo.create({
-    user: req.student.id,
+    // user: req.student.id,
     email: student.email,
     firstName,
     lastName,
