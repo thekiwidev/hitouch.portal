@@ -1,0 +1,158 @@
+@import "./variables.scss";
+
+.sidebar-container {
+  border-radius: 1rem;
+
+  background: #83e0dd;
+
+  position: fixed;
+  height: 90%;
+  width: 90%;
+
+  top: 9vh;
+  left: -100%;
+
+  transition: 0.3s ease-in-out;
+
+  margin-left: 5%;
+
+  display: flex;
+  flex-direction: column;
+
+  &.active {
+    left: 0%;
+  }
+
+  @media only screen and (min-width: $tabletView) {
+    position: static;
+
+    align-items: center;
+
+    height: 100%;
+    width: 70px;
+
+    margin: 0;
+  }
+
+  @media only screen and (min-width: $laptopView) {
+    width: 350px;
+    align-items: flex-start;
+  }
+
+  .user-container {
+    padding: 2rem 1.5rem 1rem;
+
+    width: 100%;
+
+    flex: 1;
+
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    margin-bottom: 0.1rem;
+
+    border-radius: 0.3rem;
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+
+    cursor: pointer;
+
+    transition: color 0.2s ease-out;
+
+    @media only screen and (min-width: $tabletView) {
+      padding: 2rem 1rem 1rem;
+    }
+
+    &:hover {
+      background: #006d6b;
+      color: #fff;
+    }
+
+    .user-dp {
+      font-size: 2.5rem;
+    }
+
+    .user-info {
+      @media only screen and (min-width: $tabletView) {
+        display: none;
+      }
+
+      @media only screen and (min-width: $laptopView) {
+        display: block;
+      }
+
+      h3 {
+        font-size: 1rem;
+        line-height: 1;
+
+        margin-bottom: 0.2rem;
+      }
+
+      p {
+        font-size: 13px;
+        font-weight: bold;
+
+        color: #00000095;
+        line-height: 1;
+      }
+    }
+  }
+
+  .navbar-tabs {
+    flex: 9;
+    padding: 1rem 1.5rem;
+
+    margin-top: 3rem;
+
+    @media only screen and (min-width: $laptopView) {
+      width: 100%;
+    }
+  }
+
+  footer {
+    padding: 1rem 1.5rem;
+
+    @media only screen and (min-width: $laptopView) {
+      width: 100%;
+    }
+  }
+
+  .tab-item {
+    width: 100%;
+
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+
+    padding: 0.5rem;
+    margin-bottom: 0.1rem;
+
+    border-radius: 0.3rem;
+
+    cursor: pointer;
+
+    transition: color 0.2s ease-out;
+
+    @media only screen and (min-width: $tabletView) {
+      p {
+        display: none;
+      }
+    }
+
+    @media only screen and (min-width: $laptopView) {
+      p {
+        display: block;
+      }
+    }
+
+    &:hover {
+      background: #006d6b;
+      color: #fff;
+    }
+
+    .icon {
+      font-size: 1.5rem;
+    }
+  }
+}

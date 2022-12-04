@@ -1,0 +1,407 @@
+@import "./components/variables.scss";
+
+// ===================================
+// HEADER
+// ===================================
+header.main-header {
+  width: 100%;
+  height: 10vh;
+
+  .contents {
+    padding: 1rem;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .logo {
+      flex: 1;
+
+      img {
+        width: 150px;
+      }
+    }
+
+    .active-page {
+      flex: 1;
+
+      text-transform: capitalize;
+      font-weight: 600;
+      font-size: 1.8rem;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .sign-in-out {
+      flex: 1;
+
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 1rem;
+
+      text-align: right;
+      font-size: 1.8rem;
+
+      .action {
+        text-decoration: none;
+        color: #000;
+
+        font-weight: 500;
+
+        display: flex;
+        align-items: center;
+        gap: 0.8rem;
+
+        padding: 0.6rem 1.5rem;
+
+        border-radius: 0.6rem;
+
+        cursor: pointer;
+
+        transition: 0.3s;
+
+        &:hover {
+          background: #00afef;
+          //   background: #006d6b;
+          color: #fff;
+        }
+      }
+
+      svg {
+        font-size: 2.5rem;
+      }
+    }
+  }
+}
+
+.signup-banner {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+
+  top: 0;
+  left: 0;
+
+  display: grid;
+  place-content: center;
+
+  background: #000000bc;
+  backdrop-filter: blur(5px);
+
+  .close {
+    font-size: 3rem;
+    color: #fff;
+
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+  }
+
+  .signup-contents {
+    background: #fff;
+    padding: 2rem 3rem;
+    border-radius: 1rem;
+
+    // .signup-card {
+    //   display: flex;
+    //   align-items: center;
+    // }
+
+    .signup-header {
+      text-align: center;
+      padding: 2rem;
+      margin-bottom: 2rem;
+
+      svg {
+        font-size: 5rem;
+      }
+    }
+
+    .form-field {
+      input {
+        display: block;
+        padding: 1rem;
+        outline: none;
+        margin-bottom: 1rem;
+
+        border: 1px solid #00afef;
+        border-radius: 0.5rem;
+        font-size: 1.6rem;
+
+        width: 100%;
+        max-width: 450px;
+
+        font-family: "Poppins", sans-serif;
+      }
+
+      button {
+        margin-top: 1rem;
+
+        background: #00afef;
+        color: #fff;
+
+        outline: none;
+        border: 1px solid #00afef;
+        border-radius: 0.5rem;
+
+        font-size: 1.6rem;
+
+        width: 100%;
+        max-width: 450px;
+
+        padding: 1rem;
+
+        font-family: "Poppins", sans-serif;
+
+        cursor: pointer;
+
+        transition: 0.3s;
+
+        &:hover {
+          background: none;
+          color: #000;
+        }
+      }
+    }
+
+    .other {
+      margin-top: 3rem;
+      text-align: center;
+
+      a {
+        color: #00afef;
+        text-decoration: none;
+        font-weight: 500;
+
+        &:hover {
+          text-decoration: underline #000;
+        }
+      }
+    }
+  }
+}
+
+.login-banner {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+
+  top: 0;
+  left: 0;
+
+  display: grid;
+  place-content: center;
+
+  background: #000000bc;
+  backdrop-filter: blur(5px);
+
+  .close {
+    font-size: 3rem;
+    color: #fff;
+
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+  }
+
+  .login-contents {
+    background: #fff;
+    padding: 2rem 3rem;
+    border-radius: 1rem;
+
+    // .signup-card {
+    //   display: flex;
+    //   align-items: center;
+    // }
+
+    .login-header {
+      text-align: center;
+      padding: 2rem;
+      margin-bottom: 2rem;
+
+      svg {
+        font-size: 5rem;
+      }
+    }
+
+    .form-field {
+      input {
+        display: block;
+        padding: 1rem;
+        outline: none;
+        margin-bottom: 1rem;
+
+        border: 1px solid #00afef;
+        border-radius: 0.5rem;
+        font-size: 1.6rem;
+
+        width: 100%;
+        max-width: 450px;
+
+        font-family: "Poppins", sans-serif;
+      }
+
+      button {
+        margin-top: 1rem;
+
+        background: #00afef;
+        color: #fff;
+
+        outline: none;
+        border: 1px solid #00afef;
+        border-radius: 0.5rem;
+
+        font-size: 1.6rem;
+
+        width: 100%;
+        max-width: 450px;
+
+        padding: 1rem;
+
+        font-family: "Poppins", sans-serif;
+
+        cursor: pointer;
+
+        transition: 0.3s;
+
+        &:hover {
+          background: none;
+          color: #000;
+        }
+      }
+    }
+
+    .other {
+      margin-top: 3rem;
+      text-align: center;
+
+      a {
+        color: #00afef;
+        text-decoration: none;
+        font-weight: 500;
+
+        &:hover {
+          text-decoration: underline #000;
+        }
+      }
+    }
+  }
+}
+
+main.body {
+  padding: 1.6rem;
+
+  height: 90vh;
+
+  display: flex;
+  gap: 3.5rem;
+
+  .sidebar {
+    width: 70px;
+
+    @media only screen and (min-width: $tabletView) {
+      flex: 3;
+    }
+
+    border-radius: 2rem;
+    background: lighten(#00afef, 30);
+    overflow: hidden;
+
+    height: 100%;
+
+    .user {
+      padding: 3rem 1rem;
+
+      margin-bottom: 2.5rem;
+
+      transition: 0.3s;
+      cursor: pointer;
+
+      display: flex;
+      align-items: center;
+
+      gap: 2rem;
+
+      text-decoration: none;
+      color: #000;
+
+      &:hover {
+        background: #00afef;
+        color: #fff;
+      }
+
+      @media only screen and (min-width: $tabletView) {
+        padding: 3rem 2rem;
+      }
+
+      .user-dp {
+        display: flex;
+        align-items: center;
+        font-size: 5rem;
+      }
+
+      .greet-user {
+        display: none;
+        @media only screen and (min-width: $tabletView) {
+          display: block;
+        }
+      }
+    }
+
+    .tab-links {
+      padding: 1rem;
+
+      @media only screen and (min-width: $tabletView) {
+        padding: 2rem;
+      }
+
+      .tab-item {
+        width: 100%;
+
+        padding: 0.6rem 1rem;
+        margin-bottom: 1rem;
+
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+
+        justify-content: center;
+
+        @media only screen and (min-width: $tabletView) {
+          justify-content: start;
+        }
+
+        border-radius: 0.5rem;
+
+        cursor: pointer;
+        transition: 0.3s;
+
+        text-decoration: none;
+        color: #000;
+
+        &:hover {
+          color: #fff;
+          background: #00afef;
+        }
+
+        p {
+          display: none;
+          @media only screen and (min-width: $tabletView) {
+            display: block;
+          }
+        }
+
+        .tab-icon {
+          font-size: 2.5rem;
+        }
+      }
+    }
+  }
+
+  .body-contents {
+    flex: 11;
+  }
+}
