@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const personalInfoScehma = mongoose.Schema(
+const visaInfoSchema = mongoose.Schema(
   {
     user: {
       type: mongoose.Schema.Types.ObjectId,
@@ -16,25 +16,7 @@ const personalInfoScehma = mongoose.Schema(
       type: String,
     },
 
-    otherNames: {
-      type: String,
-    },
-
-    email: {
-      type: String,
-      unique: true,
-    },
-
-    phoneNumber: {
-      type: String,
-      unique: true,
-    },
-
     dob: {
-      type: String,
-    },
-
-    firstLang: {
       type: String,
     },
 
@@ -49,18 +31,10 @@ const personalInfoScehma = mongoose.Schema(
     passportExpDate: {
       type: String,
     },
-
-    gender: {
-      type: String,
-    },
-
-    maritalStatus: {
-      type: String,
-    },
   },
   {
     timestamps: true,
   }
 );
 
-module.exports = mongoose.model("PersonalInfo", personalInfoScehma);
+module.exports = mongoose.model("VisaInfo", visaInfoSchema);

@@ -1,5 +1,10 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { toast } from "react-toastify";
+import { login, reset } from "../features/auth/authSlice";
+
+import Loading from "../components/Loading";
 
 import { TbLogin, TbX } from "react-icons/tb";
 
@@ -11,6 +16,24 @@ function Login() {
 
   const { email, password } = formData;
 
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const { user, status, message } = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    if (status === "rejected") {
+      toast.error(message);
+    }
+
+    if (status === "fulfilled" || user) {
+      navigate("/");
+    }
+
+    dispatch(reset());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user, status, message, navigate, dispatch]);
+
   const onChange = (e) => {
     setFormData((prevState) => ({
       ...prevState,
@@ -20,10 +43,19 @@ function Login() {
 
   const onSubmit = (e) => {
     e.preventDefault();
+
+    const userData = {
+      email,
+      password,
+    };
+
+    dispatch(login(userData));
   };
 
+  if (status === "pending") return <Loading />;
+
   return (
-    <div className="login-banner">
+    <section className="login-banner">
       <Link to="/" className="close">
         <TbX />
       </Link>
@@ -58,13 +90,13 @@ function Login() {
 
           <div className="other">
             <p>
-              Don't have an account? <Link to="/register">Register</Link>{" "}
+              Don't have an account? <Link to="/register">Register</Link>
               instead!
             </p>
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 }
 

@@ -17,7 +17,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 app.use("/api/users", require("./routes/studentRoute"));
-app.use("/api/info", require("./routes/personalInfoRoutes"));
+app.use("/api/users/info/personal", require("./routes/personalInfoRoutes"));
+app.use("/api/users/info/visa", require("./routes/visaRoutes"));
 
 app.use(errorHandler);
 

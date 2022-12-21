@@ -1,8 +1,12 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { register, reset } from "../features/auth/authSlice";
 
 import { TbUserPlus, TbX } from "react-icons/tb";
 
+import Loading from "../components/Loading";
+import { useDispatch, useSelector } from "react-redux";
 function Register() {
   const [formData, setFormData] = useState({
     firstName: "",
@@ -14,6 +18,22 @@ function Register() {
 
   const { firstName, lastName, email, password, confirmPassword } = formData;
 
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const { user, status, message } = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    if (status === "rejected") {
+      toast.error(message);
+    }
+    if (user) {
+      navigate("/");
+    }
+
+    dispatch(reset());
+  }, [user, message, status, navigate, dispatch]);
+
   const onChange = (e) => {
     setFormData((prevState) => ({
       ...prevState,
@@ -23,7 +43,24 @@ function Register() {
 
   const onSubmit = (e) => {
     e.preventDefault();
+
+    if (password !== confirmPassword) {
+      toast.error("Passowrds do not match");
+    } else {
+      const userData = {
+        firstName,
+        lastName,
+        email,
+        password,
+      };
+
+      dispatch(register(userData));
+    }
   };
+
+  if (status === "pending") {
+    return <Loading />;
+  }
 
   return (
     <div className="signup-banner">

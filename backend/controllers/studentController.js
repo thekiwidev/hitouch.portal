@@ -47,7 +47,7 @@ const registerStudent = asyncHandler(async (req, res) => {
     res.status(201).json({
       _id: student.id,
       email: student.email,
-      name: student.name,
+      name: userInfo.firstName,
       token: generateToken(student._id),
       info: {
         firstName: userInfo.firstName,
@@ -79,6 +79,7 @@ const loginStudent = asyncHandler(async (req, res) => {
     res.status(201).json({
       _id: student.id,
       email: student.email,
+      name: student.name.split(" ")[0],
       token: generateToken(student._id),
     });
   } else {
@@ -94,12 +95,7 @@ const loginStudent = asyncHandler(async (req, res) => {
 // @desc        get a specific user account info
 // @access      Private
 const getStudent = asyncHandler(async (req, res, next) => {
-  const { _id, email } = await Student.findById(req.student.id);
-
-  res.status(200).json({
-    id: _id,
-    email,
-  });
+  res.status(200).json(req.user);
 });
 
 // GENERATE JWT TOKEN
