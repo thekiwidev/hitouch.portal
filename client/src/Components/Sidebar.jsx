@@ -1,6 +1,10 @@
+import { useContext } from "react";
 import { TbClipboardList, TbMoodSmile, TbLayout2 } from "react-icons/tb";
 import { Link } from "react-router-dom";
+import AuthContext from "../Contexts/AuthContext";
 function Sidebar() {
+  const { user } = useContext(AuthContext);
+
   return (
     <div className="sidebar">
       <div className="contents">
@@ -9,7 +13,7 @@ function Sidebar() {
             <TbMoodSmile className="icon" />
           </div>
           <div className="greet-user">
-            <h3>Hi, {"user.name"}</h3>
+            <h3>Hi, {user ? user.name : "User"}</h3>
           </div>
         </Link>
         <div className="tab-links">

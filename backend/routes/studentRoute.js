@@ -11,7 +11,7 @@ const {
 } = require("../controllers/studentController");
 
 router.post("/", registerStudent);
-router.post("/login", loginStudent);
+router.post("/signin", loginStudent);
 router.get("/me", protect, getStudent);
 
 module.exports = router;

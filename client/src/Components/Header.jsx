@@ -1,6 +1,14 @@
 import { Link } from "react-router-dom";
 import { TbLogin, TbUserPlus } from "react-icons/tb";
+import { useContext } from "react";
+import AuthContext from "../Contexts/AuthContext";
 function Header() {
+  const { user, logout } = useContext(AuthContext);
+
+  const onLogout = () => {
+    logout();
+  };
+
   return (
     <header className="main-header">
       <div className="contents">
@@ -18,14 +26,22 @@ function Header() {
         </div>
 
         <div className="buttons">
-          <Link to="/signin" className="sign-in action">
-            <TbLogin />
-            <p>Login</p>
-          </Link>
-          <Link to="/signup" className="sign-up action">
-            <TbUserPlus />
-            <p>Register</p>
-          </Link>
+          {user ? (
+            <button className="action" onClick={onLogout}>
+              Logout
+            </button>
+          ) : (
+            <>
+              <Link to="/signin" className="sign-in action">
+                <TbLogin />
+                <p>Login</p>
+              </Link>
+              <Link to="/signup" className="sign-up action">
+                <TbUserPlus />
+                <p>Register</p>
+              </Link>
+            </>
+          )}
         </div>
       </div>
     </header>

@@ -38,6 +38,14 @@ const registerStudent = asyncHandler(async (req, res) => {
   });
 
   if (student) {
+    // CHECK IF USER INFO EXIST
+    const infoExist = await PersonalInfo.findOne({ email });
+
+    if (infoExist) {
+      res.status(400);
+      throw new Error(`Info with the email ${email}  already exist`);
+    }
+
     const userInfo = await PersonalInfo.create({
       user: student.id,
       firstName,
