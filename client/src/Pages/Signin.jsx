@@ -32,12 +32,11 @@ function Signin() {
       console.log(message);
     }
 
+    console.log(user);
     if (user) {
-      navigate("/");
-      console.log(user);
+      navigate("/dashboard");
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [status, message]);
+  }, [status, message, user, navigate]);
   return (
     <section className="sign-card sign-in">
       <div className="contents">

@@ -37,9 +37,9 @@ function Signup() {
     }
 
     if (user) {
-      navigate("/");
-      console.log(user);
+      navigate("/dashboard");
     }
+    console.log(user);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [status, message]);
 

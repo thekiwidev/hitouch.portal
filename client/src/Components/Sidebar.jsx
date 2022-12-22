@@ -8,7 +8,7 @@ function Sidebar() {
   return (
     <div className="sidebar">
       <div className="contents">
-        <Link to="/" className="user">
+        <Link to="/user" className="user">
           <div className="user-dp">
             <TbMoodSmile className="icon" />
           </div>
@@ -17,7 +17,7 @@ function Sidebar() {
           </div>
         </Link>
         <div className="tab-links">
-          <Link to="/" className="tab-item">
+          <Link to="/dashboard" className="tab-item">
             <TbLayout2 className="tab-icon" />
             <p>Dashboard</p>
           </Link>

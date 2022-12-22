@@ -3,14 +3,18 @@ import { createContext, useState } from "react";
 export const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
-  const [user, setUser] = useState(null);
+  const loggedInUser = JSON.parse(localStorage.getItem("user"));
+
+  const [user, setUser] = useState(loggedInUser ? loggedInUser : null);
   const [status, setStatus] = useState("pending"); // idle, pending, fulfilled, rejected
   const [message, setMessage] = useState("");
+
+  const BASE_URL = `http://localhost:5000/api/`;
 
   // Sign Up User
 
   const signUp = (userData) => {
-    fetch(`http://localhost:5000/api/users`, {
+    fetch(`${BASE_URL}users`, {
       method: "POST",
       headers: {
         Accept: "application/json, text/plain, */*",
@@ -20,8 +24,14 @@ export function AuthProvider({ children }) {
     })
       .then((res) => {
         setStatus("pending");
-        console.log(res);
-        if (res.ok) return res.json();
+        if (res.ok) {
+          return res.json();
+        } else {
+          setStatus("rejected");
+          setMessage("SOME ERROR");
+          console.log(res.json());
+          return res.json();
+        }
       })
       .then((data) => {
         setStatus("fulfilled");
@@ -36,7 +46,7 @@ export function AuthProvider({ children }) {
 
   // Sign In User
   const signIn = (userData) => {
-    fetch(`http://localhost:5000/api/users/signin/`, {
+    fetch(`${BASE_URL}users/signin/`, {
       method: "POST",
       headers: {
         Accept: "application/json, text/plain, */*",
@@ -46,8 +56,14 @@ export function AuthProvider({ children }) {
     })
       .then((res) => {
         setStatus("pending");
-        console.log(res);
-        return res.json();
+        if (res.ok) {
+          return res.json();
+        } else {
+          setStatus("rejected");
+          setMessage("SOME ERROR");
+          console.log(res.json());
+          return res.json();
+        }
       })
       .then((data) => {
         setStatus("fulfilled");

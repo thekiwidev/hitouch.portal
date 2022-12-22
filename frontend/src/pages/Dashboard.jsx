@@ -10,7 +10,6 @@ function Dashboard() {
   useEffect(() => {
     if (!user) {
       navigate("/login");
-      console.log(`No User`);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user, navigate]);
