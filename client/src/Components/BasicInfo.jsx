@@ -97,7 +97,7 @@ function BasicInfo() {
           name="firstName"
           id="firstName"
           placeholder="First Name"
-          value={firstName}
+          value={firstName || ""}
           onChange={onChange}
         />
         <input
@@ -105,7 +105,7 @@ function BasicInfo() {
           name="lastName"
           id="lastName"
           placeholder="Last Name"
-          value={lastName}
+          value={lastName || ""}
           onChange={onChange}
         />
         <input
@@ -113,7 +113,7 @@ function BasicInfo() {
           name="otherNames"
           id="otherNames"
           placeholder="Other Names"
-          value={otherNames}
+          value={otherNames || ""}
           onChange={onChange}
         />
         <input
@@ -121,7 +121,7 @@ function BasicInfo() {
           name="email"
           id="email"
           placeholder="placeholder@email.com"
-          value={email}
+          value={email || ""}
           onChange={onChange}
         />
         <input
@@ -129,7 +129,7 @@ function BasicInfo() {
           name="phoneNumber"
           id="phoneNumber"
           placeholder="Phone Number"
-          value={phoneNumber}
+          value={phoneNumber || ""}
           onChange={onChange}
         />
         <input
@@ -137,7 +137,7 @@ function BasicInfo() {
           name="dob"
           id="dob"
           placeholder="Date of Birth"
-          value={dob}
+          value={dob || ""}
           onChange={onChange}
         />
         <input
@@ -145,15 +145,15 @@ function BasicInfo() {
           name="firstLang"
           id="firstLang"
           placeholder="First Language"
-          value={firstLang}
+          value={firstLang || ""}
           onChange={onChange}
         />
         <input
           type="text"
           name="nationality"
           id="nationality"
-          placeholder="nationality"
-          value={nationality}
+          placeholder="Nationality"
+          value={nationality || ""}
           onChange={onChange}
         />
         <input
@@ -161,7 +161,7 @@ function BasicInfo() {
           name="passportNum"
           id="passportNum"
           placeholder="Passport Number"
-          value={passportNum}
+          value={passportNum || ""}
           onChange={onChange}
         />
         <input
@@ -169,11 +169,16 @@ function BasicInfo() {
           name="passportExpDate"
           id="passportExpDate"
           placeholder="Passport Exiration Date"
-          value={passportExpDate}
+          value={passportExpDate || ""}
           onChange={onChange}
         />
 
-        <select name="gender" id="gender" onChange={onChange} value={gender}>
+        <select
+          name="gender"
+          id="gender"
+          onChange={onChange}
+          value={gender || ""}
+        >
           <option value="Male">Male</option>
           <option value="Female">Female</option>
         </select>
@@ -181,7 +186,7 @@ function BasicInfo() {
           name="maritalStaus"
           id="maritalStaus"
           onChange={onChange}
-          value={maritalStatus}
+          value={maritalStatus || ""}
         >
           <option value="Single">Single</option>
           <option value="Married">Married</option>

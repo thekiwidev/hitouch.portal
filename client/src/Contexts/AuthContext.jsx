@@ -14,6 +14,8 @@ export function AuthProvider({ children }) {
   // Sign Up User
 
   const signUp = (userData) => {
+    setStatus("pending");
+
     fetch(`${BASE_URL}users`, {
       method: "POST",
       headers: {
@@ -23,12 +25,12 @@ export function AuthProvider({ children }) {
       body: JSON.stringify(userData),
     })
       .then((res) => {
-        setStatus("pending");
         if (res.ok) {
           return res.json();
-        } else {
+        } else if (!res.ok) {
           setStatus("rejected");
           setMessage("SOME ERROR");
+          res.clone();
           console.log(res.json());
           return res.json();
         }
@@ -46,6 +48,8 @@ export function AuthProvider({ children }) {
 
   // Sign In User
   const signIn = (userData) => {
+    setStatus("pending");
+
     fetch(`${BASE_URL}users/signin/`, {
       method: "POST",
       headers: {
@@ -55,13 +59,14 @@ export function AuthProvider({ children }) {
       body: JSON.stringify(userData),
     })
       .then((res) => {
-        setStatus("pending");
         if (res.ok) {
           return res.json();
-        } else {
-          console.log(res.json());
+        } else if (!res.ok) {
           setStatus("rejected");
           setMessage("SOME ERROR");
+          res.clone();
+          let logRes = res.clone();
+          console.log(logRes);
           return res.json();
         }
       })
@@ -95,3 +100,22 @@ export function AuthProvider({ children }) {
 }
 
 export default AuthContext;
+
+// fetch(YOUR_URL)
+// .then(res => {
+//   try {
+//     if (res.ok) {
+//       return res.json()
+//     } else {
+//       throw new Error(res)
+//     }
+//   }
+//   catch (err) {
+//     console.log(err.message)
+//     return WHATEVER_YOU_WANT_TO_RETURN
+//   }
+// })
+// .then (resJson => {
+//   return resJson.data
+// })
+// .catch(err => console.log(err))
