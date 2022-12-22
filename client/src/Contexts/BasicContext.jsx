@@ -31,8 +31,10 @@ export function BasicProvider({ children }) {
         setInfo(data[0]);
       })
       .catch((err) => {
+        console.log(err);
+        let msg = err.message;
         setStatus("rejected");
-        setMessage(err.message);
+        setMessage(msg);
       });
   };
 

@@ -59,9 +59,9 @@ export function AuthProvider({ children }) {
         if (res.ok) {
           return res.json();
         } else {
+          console.log(res.json());
           setStatus("rejected");
           setMessage("SOME ERROR");
-          console.log(res.json());
           return res.json();
         }
       })
@@ -71,8 +71,10 @@ export function AuthProvider({ children }) {
         localStorage.setItem("user", JSON.stringify(data));
       })
       .catch((err) => {
+        console.log(err);
+        let msg = err.message;
         setStatus("rejected");
-        setMessage(err.message);
+        setMessage(msg);
       });
   };
 

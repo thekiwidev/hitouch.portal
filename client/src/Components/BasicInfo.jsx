@@ -3,6 +3,9 @@ import BasicContext from "../Contexts/BasicContext";
 import AuthContext from "../Contexts/AuthContext";
 import Loading from "./Loading";
 
+// React Toastify
+import { toast } from "react-toastify";
+
 function BasicInfo() {
   const { user } = useContext(AuthContext);
   const { message, status, info, getInfo, updateInfo } =
@@ -43,6 +46,7 @@ function BasicInfo() {
   useEffect(() => {
     if (status === "rejected") {
       console.log(`Some Error took place : => ${message}`);
+      toast.error(message);
     }
 
     if (!info) {

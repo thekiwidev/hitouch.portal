@@ -5,6 +5,10 @@ import {
   // Navigate,
 } from "react-router-dom";
 
+// React Toastify
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import Signup from "./Pages/Signup";
 import Signin from "./Pages/Signin";
 import Home from "./Pages/Home";
@@ -42,6 +46,7 @@ function App() {
           </BasicProvider>
         </AuthProvider>
       </Router>
+      <ToastContainer />
     </>
   );
 }

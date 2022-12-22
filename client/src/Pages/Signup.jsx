@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import AuthContext from "../Contexts/AuthContext";
 import Loading from "../Components/Loading";
+import { toast } from "react-toastify";
 
 function Signup() {
   // initialize navigate
@@ -35,6 +36,11 @@ function Signup() {
   useEffect(() => {
     if (status === "rejected") {
       console.log(message);
+      toast.error(message);
+    }
+
+    if (status === "fulfilled") {
+      toast.success(`Sign up Successful`);
     }
 
     if (user) {
