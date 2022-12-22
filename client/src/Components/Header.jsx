@@ -3,15 +3,18 @@ import { TbLogin, TbUserPlus } from "react-icons/tb";
 import { useContext } from "react";
 import AuthContext from "../Contexts/AuthContext";
 import BasicContext from "../Contexts/BasicContext";
+import VisaContext from "../Contexts/VisaContext";
 function Header() {
   const navigate = useNavigate();
 
   const { user, logout } = useContext(AuthContext);
   const { reset } = useContext(BasicContext);
+  const { resetVisa } = useContext(VisaContext);
 
   const onLogout = () => {
     logout();
     reset();
+    resetVisa();
     navigate("/signin");
   };
 

@@ -1,19 +1,24 @@
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { toast } from "react-toastify";
+import AuthContext from "../Contexts/AuthContext";
+import VisaContext from "../Contexts/VisaContext";
+import Loading from "./Loading";
 
 function VisaInfo() {
+  const { user } = useContext(AuthContext);
+  const { message, status, info, getInfo, createInfo, updateInfo } =
+    useContext(VisaContext);
+
+  // STATES
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
     otherNames: "",
-    email: "",
-    phoneNumber: "",
     dob: "",
     firstLang: "",
-    citizenship: "",
+    nationality: "",
     passportNum: "",
     passportExpDate: "",
-    gender: "",
-    maritalStatus: "",
   });
 
   const {
@@ -33,19 +38,44 @@ function VisaInfo() {
     }));
   };
 
-  const onSubmit = (e) => {
+  const onCreate = (e) => {
     e.preventDefault();
+    createInfo(user.token, formData);
   };
+  const onUpdate = (e) => {
+    e.preventDefault();
+    updateInfo(info._id, user.token, formData);
+  };
+
+  useEffect(() => {
+    if (!info) {
+      getInfo(user.token);
+    }
+
+    if (status === "rejected") {
+      console.log(`Some Error took place : => ${message}`);
+      toast.error(message);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [info, message, user]);
+
+  useEffect(() => {
+    if (info) {
+      setFormData(info);
+    }
+  }, [info]);
+
+  if (status === "pending") return <Loading />;
 
   return (
     <section className="dashboard-section-user-info-form">
-      <form onSubmit={onSubmit} className="form-field">
+      <form onSubmit={!info ? onCreate : onUpdate} className="form-field">
         <input
           type="text"
           name="firstName"
           id="firstName"
           placeholder="First Name"
-          value={firstName}
+          value={firstName || ""}
           onChange={onChange}
         />
 
@@ -54,7 +84,7 @@ function VisaInfo() {
           name="lastName"
           id="lastName"
           placeholder="Last Name"
-          value={lastName}
+          value={lastName || ""}
           onChange={onChange}
         />
 
@@ -63,7 +93,7 @@ function VisaInfo() {
           name="dob"
           id="dob"
           placeholder="Date of Birth"
-          value={dob}
+          value={dob || ""}
           onChange={onChange}
         />
 
@@ -72,7 +102,7 @@ function VisaInfo() {
           name="firstLang"
           id="firstLang"
           placeholder="First Language"
-          value={firstLang}
+          value={firstLang || ""}
           onChange={onChange}
         />
 
@@ -80,8 +110,8 @@ function VisaInfo() {
           type="text"
           name="nationality"
           id="nationality"
-          placeholder="nationality"
-          value={nationality}
+          placeholder="Nationality"
+          value={nationality || ""}
           onChange={onChange}
         />
 
@@ -90,7 +120,7 @@ function VisaInfo() {
           name="passportNum"
           id="passportNum"
           placeholder="Passport Number"
-          value={passportNum}
+          value={passportNum || ""}
           onChange={onChange}
         />
 
@@ -99,7 +129,7 @@ function VisaInfo() {
           name="passportExpDate"
           id="passportExpDate"
           placeholder="Passport Exiration Date"
-          value={passportExpDate}
+          value={passportExpDate || ""}
           onChange={onChange}
         />
 

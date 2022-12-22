@@ -26,6 +26,14 @@ const createInfo = asyncHandler(async (req, res) => {
     res.status(401);
     throw new Error("User not found");
   }
+
+  const visaExist = await VisaInfo.findOne({ user: student });
+
+  if (visaExist) {
+    res.status(400);
+    throw new Error("Update your visa info Instead!!!");
+  }
+
   const info = await VisaInfo.create({
     user: req.student.id,
     firstName,
