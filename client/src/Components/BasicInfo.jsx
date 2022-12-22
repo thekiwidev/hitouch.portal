@@ -1,6 +1,13 @@
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import BasicContext from "../Contexts/BasicContext";
+import AuthContext from "../Contexts/AuthContext";
+import Loading from "./Loading";
 
 function BasicInfo() {
+  const { user } = useContext(AuthContext);
+  const { message, status, info, getInfo, updateInfo } =
+    useContext(BasicContext);
+
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -31,6 +38,26 @@ function BasicInfo() {
     maritalStatus,
   } = formData;
 
+  // USE EFFECTS
+
+  useEffect(() => {
+    if (status === "rejected") {
+      console.log(`Some Error took place : => ${message}`);
+    }
+
+    if (!info) {
+      getInfo(user.token);
+    }
+  }, [getInfo, info, message, status, user]);
+
+  useEffect(() => {
+    if (info) {
+      setFormData(info);
+    }
+  }, [info]);
+
+  // FUNCTIONS
+
   const onChange = (e) => {
     if (e.target === document.querySelector("#gender")) {
       setFormData((prevState) => ({
@@ -49,12 +76,14 @@ function BasicInfo() {
       ...prevState,
       [e.target.name]: e.target.value,
     }));
-    console.log(e.target, e.target.value);
   };
 
   const onSubmit = (e) => {
     e.preventDefault();
+    updateInfo(info._id, user.token, formData);
   };
+
+  if (status === "pending") return <Loading />;
 
   return (
     <section className="dashboard-section-user-info-form">

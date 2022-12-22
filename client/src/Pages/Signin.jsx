@@ -1,6 +1,9 @@
 import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import AuthContext from "../Contexts/AuthContext";
+
+import Loading from "../Components/Loading";
+
 function Signin() {
   // initialize navigate
   const navigate = useNavigate();
@@ -32,11 +35,13 @@ function Signin() {
       console.log(message);
     }
 
-    console.log(user);
     if (user) {
       navigate("/dashboard");
     }
   }, [status, message, user, navigate]);
+
+  if (status === "pending") return <Loading />;
+
   return (
     <section className="sign-card sign-in">
       <div className="contents">

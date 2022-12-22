@@ -6,7 +6,7 @@ export function AuthProvider({ children }) {
   const loggedInUser = JSON.parse(localStorage.getItem("user"));
 
   const [user, setUser] = useState(loggedInUser ? loggedInUser : null);
-  const [status, setStatus] = useState("pending"); // idle, pending, fulfilled, rejected
+  const [status, setStatus] = useState("idle"); // idle, pending, fulfilled, rejected
   const [message, setMessage] = useState("");
 
   const BASE_URL = `http://localhost:5000/api/`;
@@ -79,6 +79,7 @@ export function AuthProvider({ children }) {
   // Log Out a User
   const logout = () => {
     localStorage.removeItem("user");
+    setStatus("idle");
     setUser(null);
   };
 

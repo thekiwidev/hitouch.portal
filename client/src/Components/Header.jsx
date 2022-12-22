@@ -1,12 +1,18 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { TbLogin, TbUserPlus } from "react-icons/tb";
 import { useContext } from "react";
 import AuthContext from "../Contexts/AuthContext";
+import BasicContext from "../Contexts/BasicContext";
 function Header() {
+  const navigate = useNavigate();
+
   const { user, logout } = useContext(AuthContext);
+  const { reset } = useContext(BasicContext);
 
   const onLogout = () => {
     logout();
+    reset();
+    navigate("/signin");
   };
 
   return (

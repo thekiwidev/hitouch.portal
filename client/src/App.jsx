@@ -15,28 +15,31 @@ import VisaInfo from "./Components/VisaInfo";
 import EducationInfo from "./Components/EducationInfo";
 import OtherInfo from "./Components/OtherInfo";
 import { AuthProvider } from "./Contexts/AuthContext";
+import { BasicProvider } from "./Contexts/BasicContext";
 
 function App() {
   return (
     <>
       <Router>
         <AuthProvider>
-          <div className="App">
-            <Routes>
-              <Route path="/" element={<Home />}>
-                <Route path="/user" element={<h1>User Info</h1>} />
-                <Route path="/dashboard" element={<Dashboard />} />
-                <Route path="/info" element={<Info />}>
-                  <Route path="basic" element={<BasicInfo />} />
-                  <Route path="education" element={<EducationInfo />} />
-                  <Route path="visa" element={<VisaInfo />} />
-                  <Route path="others" element={<OtherInfo />} />
+          <BasicProvider>
+            <div className="App">
+              <Routes>
+                <Route path="/" element={<Home />}>
+                  <Route path="/user" element={<h1>User Info</h1>} />
+                  <Route path="/dashboard" element={<Dashboard />} />
+                  <Route path="/info" element={<Info />}>
+                    <Route path="basic" element={<BasicInfo />} />
+                    <Route path="education" element={<EducationInfo />} />
+                    <Route path="visa" element={<VisaInfo />} />
+                    <Route path="others" element={<OtherInfo />} />
+                  </Route>
                 </Route>
-              </Route>
-              <Route path="/signup" element={<Signup />} />
-              <Route path="/signin" element={<Signin />} />
-            </Routes>
-          </div>
+                <Route path="/signup" element={<Signup />} />
+                <Route path="/signin" element={<Signin />} />
+              </Routes>
+            </div>
+          </BasicProvider>
         </AuthProvider>
       </Router>
     </>

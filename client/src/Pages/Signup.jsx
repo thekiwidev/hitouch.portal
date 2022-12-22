@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import AuthContext from "../Contexts/AuthContext";
+import Loading from "../Components/Loading";
 
 function Signup() {
   // initialize navigate
@@ -39,9 +40,10 @@ function Signup() {
     if (user) {
       navigate("/dashboard");
     }
-    console.log(user);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [status, message]);
+
+  if (status === "pending") return <Loading />;
 
   return (
     <section className="sign-card sign-up">
